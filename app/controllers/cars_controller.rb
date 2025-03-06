@@ -22,7 +22,7 @@ class CarsController < ApplicationController
 
     respond_to do |format|
       if @car.save
-        format.html { redirect_to user_car_path(current_user, @car), notice: "Car was successfully created." }
+        format.html { redirect_to user_car_path(current_user, @car), alert: "Car was successfully created.", flash: { alert_type: "success" } }
         format.json { render :show, status: :created, location: @car }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class CarsController < ApplicationController
   def destroy
     @car.destroy!
     respond_to do |format|
-      format.html { redirect_to user_cars_path(current_user), status: :see_other, notice: "Car was successfully destroyed." }
+      format.html { redirect_to user_cars_path(current_user), status: :see_other, alert: "Car was successfully destroyed.", flash: { alert_type: "danger" } }
       format.json { head :no_content }
     end
   end

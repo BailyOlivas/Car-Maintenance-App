@@ -1,6 +1,13 @@
 <%= render "layouts/navbar" %>
 <p style="color: green"><%= notice %></p>
 
+
+<% if alert %>
+  <div class="alert alert-danger">
+    <%= alert %>
+  </div>
+<% end %>
+
 <% content_for :title, "Cars" %>
 
 
