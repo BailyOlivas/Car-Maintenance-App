@@ -1,0 +1,35 @@
+
+<%= render "layouts/navbar" %>
+<div class="fs-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+  <%= Current.user.email_address %>'s Dashboard
+
+</div>
+
+<div class= "container">
+  <h2>You have <%= Current.user.cars.count %> cars</h2>
+</div>
+
+
+<div class="container">
+ 
+
+  Welcome <%= Current.user.email_address %> 
+
+</div>
+
+
+
+
+
+
+<% content_for :title, "Cars" %>
+
+<div class= "container">
+  <h1>My Cars</h1>
+</div>
+
+<div class= "container" id="cars">
+  <% @cars.each do |car| %>
+    <%= render car %>
+  <% end %>
+</div>

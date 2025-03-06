@@ -1,0 +1,20 @@
+<p style="color: green"><%= notice %></p>
+
+
+<div class="fs-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+  <%= @car.make %>
+  <%= @car.model %>
+  <%= @car.year %>
+
+</div>
+
+<div>
+  <%= link_to "Edit this car", edit_user_car_path(current_user, @car) %> |
+  <%= link_to "Back to cars", user_cars_path(current_user) %>
+
+  <%= button_to "Destroy this car", user_car_path(current_user, @car), method: :delete %>
+</div>
+
+
+
+

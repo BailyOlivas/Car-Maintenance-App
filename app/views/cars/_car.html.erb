@@ -1,0 +1,17 @@
+<div id="<%= dom_id car %>">
+
+
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= car.make %></h5>
+    <p class="card-text"><%= car.model %></p>
+    <p class="card-text"><%= car.year %></p>
+    <div class="btn btn-outline-primary">
+      <%= link_to "Show this car", user_car_path(current_user, car) %> 
+    </div>
+
+
+  </div>
+</div>
+

@@ -1,0 +1,21 @@
+<%= form_with(model: [current_user, @car]) do |form| %>
+  <!-- Form fields for car attributes -->
+  <div>
+    <%= form.label :make %>
+    <%= form.text_field :make %>
+  </div>
+
+  <div>
+    <%= form.label :model %>
+    <%= form.text_field :model %>
+  </div>
+
+  <div>
+    <%= form.label :year %>
+    <%= form.number_field :year %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
