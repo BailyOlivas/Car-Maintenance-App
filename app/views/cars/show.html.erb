@@ -14,6 +14,22 @@
 
 </div>
 
+<div>
+
+ Last Oil Change:  <%= @car.last_oil_change || "Not recorded" %>
+
+<p> Oil Change Interval:</p> <%= @car.oil_change_interval || "Not set" %>
+
+<% if @car.oil_change_due? %>
+  <p style = "color: red; font-weight: bold;"> Oil Change is Due! </p>
+  <% else %>
+  <p style="color: green;"> Oil is up to date </p>
+<%end%>
+
+
+<p> Next Oil Change: <%= @car.next_oil_change %> Miles</p>
+
+
 <div class="container">
   
    <%= link_to "Edit this car", edit_user_car_path(current_user, @car), class: "btn btn-outline-warning" %> 
