@@ -51,6 +51,7 @@ class CarsController < ApplicationController
     end
   end
 
+
   private
 
   def require_login
@@ -67,6 +68,6 @@ class CarsController < ApplicationController
   end
 
   def car_params
-    params.require(:car).permit(:make, :model, :year, :oil_change_interval)
+    params.require(:car).permit(:make, :model, :year, :oil_change_interval, :odometer)
   end
 end
