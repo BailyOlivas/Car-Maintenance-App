@@ -5,14 +5,17 @@ validates :oil_change_interval, numericality: { only_integer: true, greater_than
 
 
 def oil_change_due?
-  return true if last_oil_change.nil? || last_oil_change.nil?
+  return true if last_oil_change.nil? || odometer.nil? || oil_change_interval.nil?
 
   miles_since_last_change = odometer - last_oil_change
   miles_since_last_change >= oil_change_interval
 end
 
-def next_oil_change
-  next_oil_change = last_oil_change + oil_change_interval
-  next_oil_change
+
+def due_in
+  return oil_change_interval if last_oil_change.nil?
+
+  miles_since_last_change = odometer - last_oil_change
+  oil_change_interval - miles_since_last_change
 end
 end
