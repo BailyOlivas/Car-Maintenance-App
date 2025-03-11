@@ -1,40 +1,53 @@
+<%= render "layouts/navbar" %>
+
 <% if alert %>
   <div class="alert alert-success">
     <%= alert %>
   </div>
 <% end %>
 
+<% if @car.oil_change_due? %>
+  <div class="alert alert-warning alert-dismissible fadeshow" role="alert">
+    ⚠️ An oil change is due! Please schedule maintenance.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% else %>
+  
+  
+<% end %>
 
 
 <div class="fs-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
   <%= @car.year %>
   <%= @car.make %>
   <%= @car.model %>
+
+  <%= link_to "Edit this car", edit_user_car_path(current_user, @car), class: "btn btn-outline-warning" %> 
   
 
 </div>
 
-<div>
+<div class="container card card w-100 p-4 mb-3" style="width: 18rem;">
+  <h3> Maintenance Dashboard </h3>
 
- Last Oil Change:  <%= @car.last_oil_change || "Not recorded" %>
+  Next Oil Change Due: <%= @car.due_in || "Not set" %>
+  <br>
+  <% if @car.oil_change_due? %>
+  <p>Oil Status: <i class="fa-solid fa-circle-exclamation" style="color:rgb(189, 0, 0);"></i></p>
+<% else %>
+  <p>Oil Status: <i class="fa-solid fa-check" style="color: #29bd00;"></i></p>
+  
+<% end %>
 
-<p> Oil Change Interval:</p> <%= @car.oil_change_interval || "Not set" %>
 
-<% if @car.oil_change_due? %>
-  <p style = "color: red; font-weight: bold;"> Oil Change is Due! </p>
-  <% else %>
-  <p style="color: green;"> Oil is up to date </p>
-<%end%>
+</div>
 
-
-<p> Next Oil Change: <%= @car.next_oil_change %> Miles</p>
 
 
 <div class="container">
   
-   <%= link_to "Edit this car", edit_user_car_path(current_user, @car), class: "btn btn-outline-warning" %> 
-
-  <%= link_to "Back to cars", user_cars_path(current_user), class: "btn btn-outline-primary" %>
+  
+  
 
   <%= button_to "Destroy this car", user_car_path(current_user, @car), method: :delete, class: "btn btn-outline-danger" %>
 </div>
