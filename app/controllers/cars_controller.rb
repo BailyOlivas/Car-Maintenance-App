@@ -25,6 +25,7 @@ class CarsController < ApplicationController
         format.html { redirect_to user_car_path(current_user, @car), alert: "Car was successfully created.", flash: { alert_type: "success" } }
         format.json { render :show, status: :created, location: @car }
       else
+        Rails.logger.debug "Car creation failed: #{@car.errors.full_messages}"
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @car.errors, status: :unprocessable_entity }
       end
@@ -59,12 +60,19 @@ class CarsController < ApplicationController
   end
 
   def set_car
-    Rails.logger.debug "Current User: #{current_user.id}"
-    Rails.logger.debug "Requested Car ID: #{params[:id]}"
-    Rails.logger.debug "Requested User ID: #{params[:user_id]}"
+    if current_user.nil?
+      redirect_to new_session_path, alert: "Please log in first." and return
+
+    end
     @car = current_user.cars.find_by(id: params[:id])
-    Rails.logger.debug "Found Car: #{@car.inspect}"
     redirect_to user_cars_path(current_user), alert: "Car not found." unless @car
+
+    if @car.nil?
+      Rails.logger.debug "Car not found!"
+      redirect_to user_cars_path(current_user), alert: "Car not found."
+    else
+      Rails.logger.debug "Found Car: #{@car.inspect}"
+    end
   end
 
   def car_params
