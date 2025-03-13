@@ -1,0 +1,6 @@
+<%= render "layouts/navbar" %>
+
+<% @car.maintenance_records.each do |record| %>
+  <p>Service Date: <%= record.service_date %></p>
+  <p>Service: <%= record.service_type %></p>
+<% end %>

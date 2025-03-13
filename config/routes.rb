@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :pages
   resources :passwords, param: :token
   resources :users do
-    resources :cars
+    resources :cars do
+      resources :maintenance_records, only: [ :new, :create, :index, :show ]
+    end
   end
 
 

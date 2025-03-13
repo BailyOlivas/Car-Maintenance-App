@@ -1,0 +1,38 @@
+<div class="container">
+  <%= form_with(model: [current_user, @car, @maintenance_record]) do |form| %>
+    <!-- Form fields for car attributes -->
+    <div class= "form-group">
+      <%= form.label :service_date %>
+      <%= form.date_field :service_date, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :service_type %>
+      <%= form.text_field :service_type, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :cost %>
+      <%= form.number_field :cost, class: "form-control" %>
+    </div>
+
+      <div class="form-group">
+      <%= form.label :notes %>
+      <%= form.text_field :notes, class: "form-control" %>
+    </div>
+
+
+
+    <br>
+
+    
+
+
+
+    <div>
+      <%= form.submit "Add Records", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+

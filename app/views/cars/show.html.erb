@@ -23,6 +23,8 @@
   <%= @car.model %>
 
   <%= link_to "Edit this car", edit_user_car_path(current_user, @car), class: "btn btn-outline-warning" %> 
+  <%= link_to "New Record", new_user_car_maintenance_record_path(current_user, @car), class: "btn btn-outline-warning" %> 
+  <%= link_to "Show Records", user_car_maintenance_record_path(current_user, @car), class: "btn btn-outline-warning" %> 
   
 
 </div>
@@ -38,7 +40,7 @@
   <p>Oil Status: <i class="fa-solid fa-check" style="color: #29bd00;"></i></p>
   
 <% end %>
-
+Maintenance Records: <%= @car.maintenance_records.count %>
 
 </div>
 
@@ -52,6 +54,39 @@
   <%= button_to "Destroy this car", user_car_path(current_user, @car), method: :delete, class: "btn btn-outline-danger" %>
 </div>
 
+<div class="container">
+
+  <h2>Maintenance Records</h2>
+
+  <% if @car.maintenance_records.present? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Service Date</th>
+          <th>Service Type</th>
+          <th>Cost</th>
+          <th>Notes</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <% @car.maintenance_records.each do |record| %>
+          <tr>
+            <td><%= record.service_date.strftime('%B %d, %Y') %></td>
+            <td><%= record.service_type %></td>
+            <td>$<%= number_to_currency(record.cost) %></td>
+            <td><%= record.notes %></td>
+        
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No maintenance records found for this car.</p>
+  <% end %>
+
+  <%= link_to "Add Maintenance Record", new_user_car_maintenance_record_path(current_user, @car), class: "btn btn-success" %>
 
 
+</div>
 
