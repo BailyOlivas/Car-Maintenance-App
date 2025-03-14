@@ -6,6 +6,8 @@ end
 
 
 def show
+  @car = Car.find(params[:car_id])
+  @maintenance_record = @car.maintenance_records.find(params[:id]) # Ensure the ID is being retrieved correctly
 end
 
 def new
@@ -26,13 +28,32 @@ def create
 end
 
 def edit
+  @maintenance_record = @car.maintenance_records.find(params[:id])  # Ensure you're fetching the record
 end
 
 def update
+  @car = Car.find_by(id: params[:car_id])
+  @maintenance_record = @car&.maintenance_records.find_by(id: params[:id])
+
+
+  if @maintenance_record.update(maintenance_record_params)
+    redirect_to user_car_path(current_user, @car), notice: "Record updated successfully."
+  else
+    render :edit, alert: "Failed to update record."
+  end
 end
 
 def destroy
+  @car = Car.find_by(id: params[:car_id])
+  @maintenance_record = @car.maintenance_records.find(params[:id])
+  @maintenance_record.destroy!
+  respond_to do |format|
+    format.html { redirect_to user_car_maintenance_record_path(current_user), status: :see_other, alert: "Record was successfully deleted.", flash: { alert_type: "danger" } }
+    format.json { head :no_content }
+  end
 end
+
+
 private
 
 def maintenance_record_params

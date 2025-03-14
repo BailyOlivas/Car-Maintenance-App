@@ -1,0 +1,12 @@
+<% content_for :title, "Edit Record" %>
+
+<h1>Edit Record</h1>
+
+<%= render "form", maintenance_record: @maintenance_record %>
+
+<br>
+
+<div>
+  <%= link_to "Show this car", new_user_car_maintenance_record_path(current_user, @car) %> |
+  <%= link_to "Back to cars", user_cars_path(current_user) %>
+</div>

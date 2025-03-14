@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resources :users do
     resources :cars do
-      resources :maintenance_records, only: [ :new, :create, :index, :show ]
+      resources :maintenance_records, only: [ :new, :create, :index, :show, :edit, :update, :destroy ]
     end
   end
 

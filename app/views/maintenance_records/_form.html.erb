@@ -1,6 +1,7 @@
-<%=render "layouts/navbar"%>
 <div class="container">
-  <%= form_with(model: [current_user, @car, @maintenance_record]) do |form| %>
+  <%= form_with(model: [current_user, @car, @maintenance_record], local: true) do |form| %>
+  
+
     <!-- Form fields for car attributes -->
     <div class= "form-group">
       <%= form.label :service_date %>
@@ -31,7 +32,7 @@
 
 
     <div>
-      <%= form.submit "Add Record", class: "btn btn-primary" %>
+      <%= form.submit "Update", class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>

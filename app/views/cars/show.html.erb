@@ -23,8 +23,8 @@
   <%= @car.model %>
 
   <%= link_to "Edit this car", edit_user_car_path(current_user, @car), class: "btn btn-outline-warning" %> 
-  <%= link_to "New Record", new_user_car_maintenance_record_path(current_user, @car), class: "btn btn-outline-warning" %> 
-  <%= link_to "Show Records", user_car_maintenance_record_path(current_user, @car), class: "btn btn-outline-warning" %> 
+  <%= button_to "Destroy this car", user_car_path(current_user, @car), method: :delete, class: "btn btn-outline-danger" %>
+
   
 
 </div>
@@ -51,7 +51,7 @@ Maintenance Records: <%= @car.maintenance_records.count %>
   
   
 
-  <%= button_to "Destroy this car", user_car_path(current_user, @car), method: :delete, class: "btn btn-outline-danger" %>
+ 
 </div>
 
 <div class="container">
@@ -59,8 +59,12 @@ Maintenance Records: <%= @car.maintenance_records.count %>
   <h2>Maintenance Records</h2>
 
   <% if @car.maintenance_records.present? %>
+  
+  
     <table class="table">
+    
       <thead>
+      
         <tr>
           <th>Service Date</th>
           <th>Service Type</th>
@@ -72,12 +76,21 @@ Maintenance Records: <%= @car.maintenance_records.count %>
       <tbody>
         <% @car.maintenance_records.each do |record| %>
           <tr>
-            <td><%= record.service_date.strftime('%B %d, %Y') %></td>
+            <td><%= record.service_date.strftime('%B %d, %Y')%>
             <td><%= record.service_type %></td>
-            <td>$<%= number_to_currency(record.cost) %></td>
+            <td><%= number_to_currency(record.cost) %></td>
             <td><%= record.notes %></td>
-        
+
+            <td>
+              <%= link_to "Edit", edit_user_car_maintenance_record_path(current_user, @car, record), class: "btn btn-warning btn-sm" %>
+              <br>
+              <%= button_to "Delete", user_car_maintenance_record_path(current_user, @car, record), method: :delete, class: "btn btn-danger btn-sm" %>
+
+            </td>
+            
           </tr>
+
+            
         <% end %>
       </tbody>
     </table>
@@ -86,7 +99,7 @@ Maintenance Records: <%= @car.maintenance_records.count %>
   <% end %>
 
   <%= link_to "Add Maintenance Record", new_user_car_maintenance_record_path(current_user, @car), class: "btn btn-success" %>
-
+ 
 
 </div>
 

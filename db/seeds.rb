@@ -17,7 +17,7 @@ User.delete_all
 user1 = User.create!(
   email_address: 'barrett@gmail.com',
   password: 'password123', # Use a plain password for seeding
-  name: 'Test User'
+  name: 'You Bawett Claire'
 )
 
 if user1.persisted?
