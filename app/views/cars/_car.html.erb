@@ -6,9 +6,18 @@
 
 <div class="card card w-100 p-4 mb-3" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title"><%= car.make %></h5>
-    <p class="card-text"><%= car.model %></p>
-    <p class="card-text"><%= car.year %></p>
+    <% if car.photo.attached? %>
+      <%= image_tag car.photo.variant(resize_to_limit: [200,200]), class: "img-thumbnail", alt: "Photo here" %>
+    <% else %>
+      <p> None </p>
+    <%end%>
+    
+    <br>
+    <br>
+
+    <h4 class="card-title"><%= car.make %></h4>
+    <h5 class="card-text"><%= car.model %></h5>
+    <h5 class="card-text"><%= car.year %></h5>
     
     <% if car.oil_change_due? %>
       <p style = "color: red; font-weight: bold;"> Oil Change is Due! </p>
@@ -21,6 +30,7 @@
 
     <div>
       <%= link_to "Show this car", user_car_path(current_user, car), class: "btn btn-outline-primary" %> 
+
     </div>
 
 
