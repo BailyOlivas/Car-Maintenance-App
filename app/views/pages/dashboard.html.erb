@@ -14,7 +14,11 @@
 </div>
 
 <div class= "container p-3">
-  <h3>You have <%= Current.user.cars.count %> cars</h3>
+  <% if Current.user.cars.count > 1 %>
+    <h3>You have <%= Current.user.cars.count %> Cars</h3>
+  <% else %>
+    <h3>You have <%= Current.user.cars.count %> Car</h3>
+  <% end %>
 </div>
 
 
