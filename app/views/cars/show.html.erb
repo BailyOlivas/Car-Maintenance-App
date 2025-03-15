@@ -12,22 +12,28 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 <% else %>
-  
-  
 <% end %>
 
 
-<div class="fs-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
-  <%= @car.year %>
-  <%= @car.make %>
-  <%= @car.model %>
+<div class="container">
+  <% if @car.photo.attached? %>
+    <%= image_tag @car.photo.variant(resize_to_limit: [250,250]), class: "img-thumbnail", alt: "Photo of #{@car.make} #{@car.model}" %>
+  <% else %>
+    <p>No photo available</p>
+  <% end %>
 
-  <%= link_to "Edit this car", edit_user_car_path(current_user, @car), class: "btn btn-outline-warning" %> 
-  <%= button_to "Destroy this car", user_car_path(current_user, @car), method: :delete, class: "btn btn-outline-danger" %>
-
-  
-
+  <div class="fs-3 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+    <%= @car.year %>
+    <%= @car.make %>
+    <%= @car.model %>
+    <br>
+    <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <%= button_to "Edit this car", edit_user_car_path(current_user, @car), method: :get, class: "btn btn-outline-warning me-2" %>
+      <%= button_to "Delete Car", user_car_path(current_user, @car), method: :delete, class: "btn btn-outline-danger" %>
+    </div>
+  </div>
 </div>
+
 
 <div class="container card card w-100 p-4 mb-3" style="width: 18rem;">
   <h3> Maintenance Dashboard </h3>
@@ -97,11 +103,12 @@ Maintenance Records: <%= @car.maintenance_records.count %>
       </tbody>
     </table>
   <% else %>
-    <p>No maintenance records found for this car.</p>
+    <p>No maintenance records found for this car. Add one to get started. </p>
   <% end %>
 
   <%= link_to "Add Maintenance Record", new_user_car_maintenance_record_path(current_user, @car), class: "btn btn-success" %>
  
 
 </div>
+
 

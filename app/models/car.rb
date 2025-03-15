@@ -1,6 +1,7 @@
 class Car < ApplicationRecord
 belongs_to :user, optional: true
 has_many :maintenance_records, dependent: :destroy
+has_one_attached :photo
 
 validates :make, presence: true
 validates :model, presence: true

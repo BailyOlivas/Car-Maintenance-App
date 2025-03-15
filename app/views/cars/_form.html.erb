@@ -31,6 +31,10 @@
     <%= form.number_field :odometer %>
   </div>
 
+    <div class="form-group">
+      <%= form.label :photo %>
+      <%= form.file_field :photo, class:"form-control"%>
+
    <div>
     <%= form.label :oil_change_interval, style: "display: block" %>
     <%= form.number_field :oil_change_interval %>
