@@ -69,7 +69,7 @@ Maintenance Records: <%= @car.maintenance_records.count %>
   <% if @car.maintenance_records.present? %>
   
   
-    <table class="table">
+    <table class="table table-striped p-4">
     
       <thead>
       
@@ -90,8 +90,9 @@ Maintenance Records: <%= @car.maintenance_records.count %>
             <td><%= record.notes %></td>
 
             <td>
+            
               <%= link_to "Edit", edit_user_car_maintenance_record_path(current_user, @car, record), class: "btn btn-warning btn-sm" %>
-              <br>
+            
               <%= button_to "Delete", user_car_maintenance_record_path(current_user, @car, record), method: :delete, class: "btn btn-danger btn-sm" %>
 
             </td>
@@ -107,6 +108,8 @@ Maintenance Records: <%= @car.maintenance_records.count %>
   <% end %>
 
   <%= link_to "Add Maintenance Record", new_user_car_maintenance_record_path(current_user, @car), class: "btn btn-success" %>
+
+
  
 
 </div>
