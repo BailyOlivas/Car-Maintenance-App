@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "users/new"
+  get "users/create"
   resource :session
   resources :pages
   resources :passwords, param: :token
@@ -23,4 +25,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
   get "dashboard", to: "pages#dashboard"
+  get "/signup", to: "users#new"
+  post "/users", to: "users#create"
 end
