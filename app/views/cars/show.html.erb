@@ -90,10 +90,13 @@ Maintenance Records: <%= @car.maintenance_records.count %>
             <td><%= record.notes %></td>
 
             <td>
+
+             <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <%= link_to "Edit", edit_user_car_maintenance_record_path(current_user, @car, record), class: "btn btn-outline-warning me-2" %>
+                <%= button_to "Delete", user_car_maintenance_record_path(current_user, @car, record), method: :delete, class: "btn btn-outline-danger" %>
+             </div>
             
-              <%= link_to "Edit", edit_user_car_maintenance_record_path(current_user, @car, record), class: "btn btn-warning btn-sm" %>
-            
-              <%= button_to "Delete", user_car_maintenance_record_path(current_user, @car, record), method: :delete, class: "btn btn-danger btn-sm" %>
+              
 
             </td>
             
