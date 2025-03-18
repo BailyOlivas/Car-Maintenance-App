@@ -25,8 +25,12 @@
 <% content_for :title, "Cars" %>
 
 
-<div class= "container" id="cars">
-  <% @cars.each do |car| %>
-    <%= render car %>
+<div class= "container-sm" id="cars">
+  <% if @cars.any? %>
+    <% @cars.each do |car| %>
+      <%= render car %>
+    <% end %>
+  <% else %>
+  
   <% end %>
 </div>

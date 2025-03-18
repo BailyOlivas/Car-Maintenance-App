@@ -1,12 +1,15 @@
-<% content_for :title, "Edit Record" %>
+<div class="container pt-5">
 
-<h1>Edit Record</h1>
+    <% content_for :title, "Edit Maintenance Record" %>
 
-<%= render "form", maintenance_record: @maintenance_record %>
+    <h1>Edit Record</h1>
 
-<br>
+    <%= render "form", maintenance_record: @maintenance_record %>
 
-<div>
-  <%= link_to "Show this car", new_user_car_maintenance_record_path(current_user, @car) %> |
-  <%= link_to "Back to cars", user_cars_path(current_user) %>
+    <br>
+
+    <div class="container">
+        <%= link_to "Back", request.referer || root_path, class: "btn btn-secondary" %>
+    </div>
+
 </div>
