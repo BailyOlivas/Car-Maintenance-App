@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  # API Routes
+
+  namespace :api do
+    namespace :v1 do
+      post "login", to: "sessions#create"
+      post "signup", to: "users#create"
+      get "cars", to: "cars#index"
+      resources :users, only: [ :create ] do
+          resources :cars, only: [ :create ] do
+            resources :maintenance_records, only: [ :create, :index ]
+          end
+        end
+    end
+  end
+
+
   get "users/new"
   get "users/create"
   resource :session

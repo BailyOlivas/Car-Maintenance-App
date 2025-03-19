@@ -2,12 +2,22 @@ class MaintenanceRecordsController < ApplicationController
 before_action :set_car, only: %i[show edit update destroy]
 def index
   @maintenance_records = current_user.maintenance_records
+
+  respond_to do |format|
+    format.html
+    format.json { render json: @logs }
+  end
 end
 
 
 def show
   @car = Car.find(params[:car_id])
   @maintenance_record = @car.maintenance_records.find(params[:id]) # Ensure the ID is being retrieved correctly
+
+  respond_to do |format|
+    format.html
+    format.json { render json: @log }
+  end
 end
 
 def new
@@ -19,11 +29,16 @@ def create
   @car = Car.find(params[:car_id])
   @maintenance_record = @car.maintenance_records.build(maintenance_record_params)
 
-
-  if @maintenance_record.save
-    redirect_to user_car_path(current_user, @car), notice: "Maintenance record created successfully."
-  else
-    render :new, alert: "Failed to create maintenance record."
+  respond_to do |format|
+    if @maintenance_record.save
+      redirect_to user_car_path(current_user, @car), notice: "Maintenance record created successfully."
+      format.html { redirect_to @log, notice: "Record created" }
+      format.json { render json: @log, status: :created }
+    else
+      render :new, alert: "Failed to create maintenance record."
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: { errors: @log.errors.full_messages }, status: :unprocessable_entity }
+    end
   end
 end
 
