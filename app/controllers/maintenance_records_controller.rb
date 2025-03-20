@@ -31,13 +31,12 @@ def create
 
   respond_to do |format|
     if @maintenance_record.save
-      redirect_to user_car_path(current_user, @car), notice: "Maintenance record created successfully."
-      format.html { redirect_to @log, notice: "Record created" }
-      format.json { render json: @log, status: :created }
+      format.html { redirect_to user_car_path(current_user, @car), notice: "Maintenance record created successfully." }
+      format.json { render json: @maintenance_record, status: :created }
     else
-      render :new, alert: "Failed to create maintenance record."
+      flash[:alert] = "Failed to create maintenance record."  # Proper way to show flash message
       format.html { render :new, status: :unprocessable_entity }
-      format.json { render json: { errors: @log.errors.full_messages }, status: :unprocessable_entity }
+      format.json { render json: { errors: @maintenance_record.errors.full_messages }, status: :unprocessable_entity }
     end
   end
 end
@@ -72,7 +71,7 @@ end
 private
 
 def maintenance_record_params
-  params.require(:maintenance_record).permit(:service_date, :service_type, :cost, :notes)
+  params.require(:maintenance_record).permit(:service_date, :service_type, :cost, :notes, :miles)
 end
 
 
