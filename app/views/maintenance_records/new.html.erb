@@ -7,9 +7,18 @@
       <%= form.date_field :service_date, class: "form-control" %>
     </div>
 
+
     <div class="form-group">
-      <%= form.label :service_type %>
-      <%= form.text_field :service_type, class: "form-control" %>
+      <%= form.label :miles %>
+      <%= form.number_field :miles, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :service_type, "Select Service Type" %>
+      <%= form.select :service_type, 
+                    MaintenanceRecord.service_types.keys.map { |key| [key.humanize, key] }, 
+                    { prompt: "Select Service Type" }, 
+                    class: "form-control" %>
     </div>
 
     <div class="form-group">
