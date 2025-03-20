@@ -75,6 +75,7 @@ Maintenance Records: <%= @car.maintenance_records.count %>
       
         <tr>
           <th>Service Date</th>
+          <th>Miles</th>
           <th>Service Type</th>
           <th>Cost</th>
           <th>Notes</th>
@@ -82,10 +83,11 @@ Maintenance Records: <%= @car.maintenance_records.count %>
         </tr>
       </thead>
       <tbody>
-        <% @car.maintenance_records.each do |record| %>
+        <% @car.maintenance_records.order(service_date: :asc).each do |record| %>
           <tr>
             <td><%= record.service_date.strftime('%B %d, %Y')%>
-            <td><%= record.service_type %></td>
+            <td><%= record.miles %></td>
+            <td><%= record.service_type&.humanize || "" %></td>
             <td><%= number_to_currency(record.cost) %></td>
             <td><%= record.notes %></td>
 
