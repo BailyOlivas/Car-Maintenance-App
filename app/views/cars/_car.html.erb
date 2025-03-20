@@ -15,6 +15,7 @@
     <h4 class="card-title"><%= link_to car.make, user_car_path(current_user, car), style: "text-decoration: none;" %></h4>
     <h5 class="card-text"><%= car.model %></h5>
     <h5 class="card-text"><%= car.year %></h5>
+    <h5 class="card-text">Maintenance Records: <%= car.maintenance_records.count %></h5>
   
     
     <% if car.oil_change_due? %>
