@@ -4,3 +4,5 @@
   <p>Service Date: <%= record.service_date %></p>
   <p>Service: <%= record.service_type %></p>
 <% end %>
+
+<%= link_to "Back", user_car_path(current_user, @car)%>
