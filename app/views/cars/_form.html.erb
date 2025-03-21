@@ -11,43 +11,46 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :make, style: "display: block" %>
-    <%= form.text_field :make %>
-  </div>
 
-  <div>
-    <%= form.label :model, style: "display: block" %>
-    <%= form.text_field :model %>
-  </div>
-
-  <div>
-    <%= form.label :year, style: "display: block" %>
-    <%= form.number_field :year %>
-  </div>
-
-  <div>
-    <%= form.label :odometer, style: "display: block" %>
-    <%= form.number_field :odometer %>
-  </div>
+  <div class="container">
+    <div class="form-group">
+      <%= form.label :make, style: "display: block" %>
+      <%= form.text_field :make, class:"form-control" %>
+    </div>
 
     <div class="form-group">
-      <%= form.label :photo %>
-      <%= form.file_field :photo, class:"form-control"%>
+      <%= form.label :model, style: "display: block" %>
+      <%= form.text_field :model, class:"form-control" %>
+    </div>
 
-   <div>
-    <%= form.label :oil_change_interval, style: "display: block" %>
-    <%= form.number_field :oil_change_interval %>
+    <div class="form-group">
+      <%= form.label :year, style: "display: block" %>
+      <%= form.number_field :year, class: "form-control" %>
+    </div>
+
+    <div class= "form-group">
+      <%= form.label :odometer, style: "display: block" %>
+      <%= form.number_field :odomete, class:"form-control" %>
+    </div>
+
+      <div class="form-group">
+        <%= form.label :photo %>
+        <%= form.file_field :photo, class:"form-control"%>
+
+    <div class="form-group">
+      <%= form.label :oil_change_interval, style: "display: block" %>
+      <%= form.number_field :oil_change_interval, class:"form-control" %>
+    </div>
+
+  <div class= "form-group">
+    <%= form.label :last_oil_change, style: "display: block" %>
+    <%= form.number_field :last_oil_change, class:"form-control" %>
   </div>
 
-<div>
-  <%= form.label :last_oil_change, style: "display: block" %>
-  <%= form.number_field :last_oil_change %>
+    <br>
+
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
 </div>
-
-  <br>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
