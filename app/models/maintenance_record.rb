@@ -4,6 +4,7 @@ class MaintenanceRecord < ApplicationRecord
 
   enum :service_type, oil_change: 0, brake_inspection: 1
   validates :service_date, presence: true
+  validates :miles, presence: true
 
   after_create :update_car_odometer, :update_car_last_oil_change
 
