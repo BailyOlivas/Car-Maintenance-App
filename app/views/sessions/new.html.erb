@@ -1,20 +1,29 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
 
-
-<div class="container pt-5">
-  <%= form_with url: session_path do |form| %>
-    <div class="form-group">
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class:"form-control" %><br>
-      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 32, class: "form-control" %><br>
-      <%= form.submit "Sign in" %>
-    <% end %>
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <!-- Image Column -->
+    <div class="col-md-6 p-0">
+      <%= image_tag "Login/bmw_cover.jpg", alt: "BMW", class: "img-fluid w-100 h-100", style: "object-fit: cover;" %>
     </div>
+    <!-- Content Column -->
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <div class="container pt-5 w-75">
+        <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+        <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+        <br>
 
-
-
-  <br>
-
-  <%= link_to "Forgot password?", new_password_path %>
-  <%= link_to "New account?", signup_path %>
+        <h1> Welcome Back </h1>
+        <br>
+        <%= form_with url: session_path do |form| %>
+          <div class="form-group">
+            <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class:"form-control" %><br>
+            <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 32, class: "form-control" %><br>
+            <%= form.submit "Sign in" %>
+        <% end %>
+      <br>
+        <%= link_to "Forgot password?", new_password_path %>
+        <%= link_to "New account?", signup_path %>
+    </div>
+  </div>
 </div>
+
