@@ -11,8 +11,14 @@
     </div>
   <% end %>
 
-
+  
   <div class="container">
+      <div class="form-group">
+        <%= form.label :nickname %>
+        <%= form.text_field :nickname, class: "form-control" %>
+    </div>
+
+  
     <div class="form-group">
       <%= form.label :make, style: "display: block" %>
       <%= form.text_field :make, class:"form-control" %>

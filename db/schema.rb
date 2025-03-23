@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_20_055616) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_23_005735) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,6 +52,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_055616) do
     t.integer "odometer"
     t.integer "last_oil_change"
     t.integer "user_id"
+    t.string "nickname"
     t.index ["user_id"], name: "index_cars_on_user_id"
   end
 
