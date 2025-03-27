@@ -32,9 +32,11 @@ def create
   respond_to do |format|
     if @maintenance_record.save
       format.html { redirect_to user_car_path(current_user, @car), notice: "Maintenance record created successfully." }
+      format.js
       format.json { render json: @maintenance_record, status: :created }
     else
       flash[:alert] = "Failed to create maintenance record."  # Proper way to show flash message
+      format.js
       format.html { render :new, status: :unprocessable_entity }
       format.json { render json: { errors: @maintenance_record.errors.full_messages }, status: :unprocessable_entity }
     end
@@ -58,12 +60,19 @@ def update
 end
 
 def destroy
-  @car = Car.find_by(id: params[:car_id])
+  @car = Car.find(params[:car_id])
   @maintenance_record = @car.maintenance_records.find(params[:id])
-  @maintenance_record.destroy!
-  respond_to do |format|
-    format.html { redirect_to user_car_maintenance_record_path(current_user), status: :see_other, alert: "Record was successfully deleted.", flash: { alert_type: "danger" } }
-    format.json { head :no_content }
+
+  if @maintenance_record
+
+    @maintenance_record.destroy!
+    respond_to do |format|
+      format.js
+      format.html { redirect_to user_car_path(current_user, @car), status: :see_other, alert: "Record was successfully deleted.", flash: { alert_type: "danger" } }
+      format.json { head :no_content }
+    end
+  else
+      redirect_to dashboard_path
   end
 end
 

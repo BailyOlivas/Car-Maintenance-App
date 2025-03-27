@@ -1,5 +1,8 @@
 <%= render "layouts/navbar" %>
 
+
+
+
 <% if alert %>
   <div class="alert alert-success">
     <%= alert %>
@@ -27,7 +30,9 @@
     <%= @car.year %>
     <%= @car.make %>
     <%= @car.model %>
+    <%= "("+@car.nickname+")" %>
     <br>
+    
     <div class="btn-group" role="group" aria-label="Basic outlined example">
       <%= button_to "Edit this car", edit_user_car_path(current_user, @car), method: :get, class: "btn btn-outline-warning me-2" %>
       <%= button_to "Delete Car", user_car_path(current_user, @car), method: :delete, class: "btn btn-outline-danger" %>
@@ -42,16 +47,29 @@
   Next Oil Change Due: <%= @car.due_in || "Not set" %>
   <br>
   <% if @car.oil_change_due? %>
-  <p>Oil Status: <i class="fa-solid fa-circle-exclamation" style="color:rgb(189, 0, 0);"></i></p>
-<% else %>
-  <p>Oil Status: <i class="fa-solid fa-check" style="color: #29bd00;"></i></p>
+     <p>
+    Oil Status:
+    <span style="color:rgb(230, 0, 0);">DUE</span> 
+  </p>
+  <% else %>
+    <p>
+    Oil Status:
+    <span style="color: #29bd00;">OK</span>
+  </p>
   
-<% end %>
+  <% end %>
 
 
 Maintenance Records: <%= @car.maintenance_records.count %>
 <br>
 Miles: <%= @car.odometer %>
+
+<% if @car.overdue %>
+  <p>True</p>
+<%else%>
+  <p>False</p>
+<%end%>
+
 
 </div>
 
@@ -87,7 +105,7 @@ Miles: <%= @car.odometer %>
       </thead>
       <tbody>
         <% @car.maintenance_records.order(service_date: :asc).each do |record| %>
-          <tr>
+          <tr id="maintenance_record_<%= record.id %>">
             <td><%= record.service_date.strftime('%B %d, %Y') || "N/A"%>
             <td><%= record.miles %></td>
             <td><%= record.service_type&.humanize || "" %></td>
@@ -97,8 +115,8 @@ Miles: <%= @car.odometer %>
             <td>
 
              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <%= link_to "Edit", edit_user_car_maintenance_record_path(current_user, @car, record), class: "btn btn-outline-warning" %>
-                <%= button_to "Delete", user_car_maintenance_record_path(current_user, @car, record), method: :delete, class: "btn btn-outline-danger" %>
+                <%= link_to "Edit", edit_user_car_maintenance_record_path(current_user, @car, record) %>
+                <%= button_to "Delete", user_car_maintenance_record_path(current_user, @car, record), method: :delete, remote: true %>
                 <%= link_to "View", user_car_maintenance_record_path(current_user, @car, record), class: "btn btn-outline-primary"%>
              </div>
             

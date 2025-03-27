@@ -1,8 +1,29 @@
 <%= render "layouts/navbar" %>
 
-<% @car.maintenance_records.each do |record| %>
-  <p>Service Date: <%= record.service_date %></p>
-  <p>Service: <%= record.service_type %></p>
-<% end %>
+<div class="container">
 
-<%= link_to "Back", user_car_path(current_user, @car)%>
+
+
+
+  <h1>Maintenance Record Details</h1>
+
+  <p>
+    <strong>Service Date:</strong>
+    <%= @maintenance_record.service_date.present? ? @maintenance_record.service_date.strftime('%B %d, %Y') : "Not Available" %>
+  </p>
+
+  <p>
+    <strong>Miles:</strong>
+    <%= @maintenance_record.miles %>
+  </p>
+
+  <p>
+    <strong>Service Type:</strong>
+    <%= @maintenance_record.service_type.humanize %>
+  </p>
+
+  <p>
+    <strong>Cost:</strong>
+    <%= number_to_currency(@maintenance_record.cost) %>
+  </p>
+</div>

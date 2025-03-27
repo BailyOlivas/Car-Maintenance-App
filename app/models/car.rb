@@ -24,4 +24,8 @@ def due_in
   miles_since_last_change = odometer - last_oil_change
   oil_change_interval - miles_since_last_change
 end
+
+def overdue
+  true if due_in < 0
+end
 end

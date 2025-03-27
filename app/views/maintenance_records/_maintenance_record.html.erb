@@ -1,0 +1,14 @@
+<!-- app/views/maintenance_records/_maintenance_record.html.erb -->
+<div id="maintenance_record_<%= record.id %>" class="maintenance-record">
+  <p><strong>Service Date:</strong> <%= record.service_date %></p>
+  <p><strong>Miles:</strong> <%= record.miles %></p>
+  <p><strong>Service Type:</strong> <%= record.service_type.humanize %></p>
+  <p><strong>Cost:</strong> <%= number_to_currency(record.cost) %></p>
+  <p><strong>Notes:</strong> <%= record.notes %></p>
+  
+  <%= button_to "Delete", user_car_maintenance_record_path(current_user, record.car, record), 
+      method: :delete, 
+      remote: true, 
+      data: { confirm: "Are you sure?" },
+      class: "btn btn-danger" %>
+</div>
