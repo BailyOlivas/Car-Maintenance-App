@@ -31,8 +31,8 @@ def create
 
   respond_to do |format|
     if @maintenance_record.save
-      format.html { redirect_to user_car_path(current_user, @car), notice: "Maintenance record created successfully." }
       format.js
+      format.html { redirect_to user_car_path(current_user, @car), notice: "Maintenance record created successfully." }
       format.json { render json: @maintenance_record, status: :created }
     else
       flash[:alert] = "Failed to create maintenance record."  # Proper way to show flash message
